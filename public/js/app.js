@@ -1920,8 +1920,18 @@ module.exports = {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _CommentsPost__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./CommentsPost */ "./resources/js/components/CommentsPost.vue");
-/* harmony import */ var _CommentsItems__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./CommentsItems */ "./resources/js/components/CommentsItems.vue");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _CommentsPost__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./CommentsPost */ "./resources/js/components/CommentsPost.vue");
+/* harmony import */ var _CommentsItems__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./CommentsItems */ "./resources/js/components/CommentsItems.vue");
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
 //
 //
 //
@@ -1952,13 +1962,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
+
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
-    CommentsPost: _CommentsPost__WEBPACK_IMPORTED_MODULE_0__["default"],
-    CommentsItems: _CommentsItems__WEBPACK_IMPORTED_MODULE_1__["default"]
+    CommentsPost: _CommentsPost__WEBPACK_IMPORTED_MODULE_2__["default"],
+    CommentsItems: _CommentsItems__WEBPACK_IMPORTED_MODULE_3__["default"]
   },
   props: {
     objectId: {
@@ -1968,20 +1978,44 @@ __webpack_require__.r(__webpack_exports__);
     type: {
       type: String,
       "default": "article"
-    },
-    RoundButton: {
-      type: Boolean,
-      "default": false
     }
   },
   data: function data() {
     return {
-      parent: 0
+      parent: 0,
+      items: []
     };
   },
+  mounted: function mounted() {
+    this.fetch();
+  },
   methods: {
-    refreshItems: function refreshItems() {
-      this.$refs.comments_items.fetch();
+    fetch: function fetch() {
+      var _this = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
+        var res;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                _context.next = 2;
+                return axios__WEBPACK_IMPORTED_MODULE_1___default.a.get("/api/comments/items/".concat(_this.type, "/").concat(_this.objectId));
+
+              case 2:
+                res = _context.sent;
+
+                if (res.data.success) {
+                  _this.items = res.data.result;
+                }
+
+              case 4:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee);
+      }))();
     }
   }
 });
@@ -1998,7 +2032,6 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _CommentsPost__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./CommentsPost */ "./resources/js/components/CommentsPost.vue");
-/* harmony import */ var _CommentsItems__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./CommentsItems */ "./resources/js/components/CommentsItems.vue");
 //
 //
 //
@@ -2060,13 +2093,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "CommentsItem",
   components: {
     CommentsPost: _CommentsPost__WEBPACK_IMPORTED_MODULE_0__["default"],
-    CommentsItems: _CommentsItems__WEBPACK_IMPORTED_MODULE_1__["default"]
+    CommentsItems: function CommentsItems() {
+      return Promise.resolve(/*! import() */).then(__webpack_require__.bind(null, /*! ./CommentsItems.vue */ "./resources/js/components/CommentsItems.vue"));
+    }
   },
   props: {
     item: {
@@ -2095,17 +2129,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
-/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _CommentsItem__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./CommentsItem */ "./resources/js/components/CommentsItem.vue");
-
-
-function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
-
-function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
-
+/* harmony import */ var _CommentsItem__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./CommentsItem */ "./resources/js/components/CommentsItem.vue");
 //
 //
 //
@@ -2117,12 +2141,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
-
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "CommentsItems",
   components: {
-    CommentsItem: _CommentsItem__WEBPACK_IMPORTED_MODULE_2__["default"]
+    CommentsItem: _CommentsItem__WEBPACK_IMPORTED_MODULE_0__["default"]
   },
   props: {
     type: {
@@ -2132,44 +2155,21 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     objectId: {
       type: Number,
       "default": 0
+    },
+    items: {
+      type: Array,
+      "default": function _default() {
+        return [];
+      }
     }
-  },
-  mounted: function mounted() {
-    this.fetch();
   },
   data: function data() {
     return {
       finalItems: []
     };
   },
-  methods: {
-    fetch: function fetch() {
-      var _this = this;
-
-      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
-        var res;
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
-          while (1) {
-            switch (_context.prev = _context.next) {
-              case 0:
-                _context.next = 2;
-                return axios__WEBPACK_IMPORTED_MODULE_1___default.a.get("api/comments/items/article");
-
-              case 2:
-                res = _context.sent;
-
-                if (res.data.success) {
-                  _this.finalItems = res.result;
-                }
-
-              case 4:
-              case "end":
-                return _context.stop();
-            }
-          }
-        }, _callee);
-      }))();
-    }
+  mounted: function mounted() {
+    this.finalItems = this.items;
   },
   watch: {
     items: function items(val, old) {
@@ -2201,6 +2201,23 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -2272,13 +2289,14 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 _this.loading = true;
                 fd = new FormData();
                 fd.append("o", _this.objectId);
+                fd.append("name", _this.formData.name);
                 fd.append("content", _this.formData.content);
                 fd.append("parent", _this.parent);
                 fd.append("type", _this.type);
-                _context.next = 8;
-                return axios__WEBPACK_IMPORTED_MODULE_1___default.a.post("api/comments/new", fd);
+                _context.next = 9;
+                return axios__WEBPACK_IMPORTED_MODULE_1___default.a.post("/api/comments/new", fd);
 
-              case 8:
+              case 9:
                 res = _context.sent;
 
                 if (res.data.success) {
@@ -2294,7 +2312,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
                 _this.loading = false;
 
-              case 11:
+              case 12:
               case "end":
                 return _context.stop();
             }
@@ -2319,7 +2337,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".new_comment__item[data-v-220b88dc] {\n  display: flex;\n  align-items: flex-start;\n  width: 100%;\n}\n.new_comment__content_block[data-v-220b88dc] {\n  width: 90%;\n  border-bottom: 1px dashed #ccc;\n  padding-bottom: 10px;\n}\n.new_comment__content[data-v-220b88dc] {\n  font-size: 14px;\n  text-align: justify;\n  margin: 10px 0 5px;\n  font-family: vazir;\n}\n.new_comment__avatar[data-v-220b88dc] {\n  width: 10%;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  background-color: #ccc;\n  border-radius: 50%;\n  margin: 0 0 0 10px;\n  width: 50px;\n  height: 50px;\n}\n.new_comment__avatar img[data-v-220b88dc] {\n  width: 100%;\n  border-radius: 50%;\n}\n.new_comment__header[data-v-220b88dc] {\n  display: flex;\n}\n.new_comment__header__time[data-v-220b88dc] {\n  margin-right: auto;\n  font-family: IS;\n  font-size: 12px;\n}\n.new_comment__header__title[data-v-220b88dc] {\n  font-weight: bold;\n}\n.new_comment__footer[data-v-220b88dc] {\n  display: flex;\n}\n.new_comment__footer__like[data-v-220b88dc] {\n  margin-right: auto;\n  display: flex;\n  align-items: center;\n  margin-left: 10px;\n  font-family: IS;\n  font-size: 12px;\n}\n.new_comment__footer__dislike[data-v-220b88dc] {\n  display: flex;\n  align-items: center;\n  font-family: IS;\n  color: red;\n}\n.new_comment__footer__reply[data-v-220b88dc] {\n  font-size: 12px;\n  cursor: pointer;\n}\n.new_comment__footer__reply[data-v-220b88dc]:hover {\n  color: #a50034;\n}\n.new_comment__footer__reply div[data-v-220b88dc] {\n  display: flex;\n  align-items: center;\n}\n.new_comment__children[data-v-220b88dc] {\n  padding-right: 30px;\n  margin-top: 10px;\n}\n.new_comment__children .new_comment__avatar[data-v-220b88dc] {\n  max-width: 40px;\n  max-height: 40px;\n}\n.new_comment .fade-enter-active[data-v-220b88dc],\n.new_comment .fade-leave-active[data-v-220b88dc] {\n  transition: opacity 0.2s;\n}\n.new_comment .fade-enter[data-v-220b88dc],\n.new_comment .fade-leave-to[data-v-220b88dc] {\n  opacity: 0;\n}\n@media only screen and (max-width: 480px) {\n.new_comment__avatar[data-v-220b88dc] {\n    width: 45px;\n    height: 45px;\n}\n.new_comment__header__title[data-v-220b88dc] {\n    font-size: 12px;\n}\n}", ""]);
+exports.push([module.i, ".new_comment__item[data-v-220b88dc] {\n  display: flex;\n  align-items: flex-start;\n  width: 100%;\n}\n.new_comment__content_block[data-v-220b88dc] {\n  width: 90%;\n  border-bottom: 1px dashed #ccc;\n  padding-bottom: 10px;\n}\n.new_comment__content[data-v-220b88dc] {\n  font-size: 14px;\n  text-align: justify;\n  margin: 10px 0 5px;\n}\n.new_comment__avatar[data-v-220b88dc] {\n  width: 10%;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  background-color: #a50034;\n  color: white;\n  border-radius: 50%;\n  margin: 0 10px 0 0;\n  width: 50px;\n  height: 50px;\n}\n.new_comment__avatar img[data-v-220b88dc] {\n  width: 100%;\n  border-radius: 50%;\n}\n.new_comment__header[data-v-220b88dc] {\n  display: flex;\n}\n.new_comment__header__time[data-v-220b88dc] {\n  margin-right: auto;\n  font-size: 12px;\n}\n.new_comment__header__title[data-v-220b88dc] {\n  font-weight: bold;\n}\n.new_comment__footer[data-v-220b88dc] {\n  display: flex;\n}\n.new_comment__footer__reply[data-v-220b88dc] {\n  font-size: 12px;\n  cursor: pointer;\n  margin-right: 10px;\n}\n.new_comment__footer__reply[data-v-220b88dc]:hover {\n  color: #a50034;\n}\n.new_comment__children[data-v-220b88dc] {\n  padding-left: 30px;\n  margin-top: 10px;\n}\n.new_comment__children .new_comment__avatar[data-v-220b88dc] {\n  max-width: 40px;\n  max-height: 40px;\n}\n.new_comment .fade-enter-active[data-v-220b88dc],\n.new_comment .fade-leave-active[data-v-220b88dc] {\n  transition: opacity 0.2s;\n}\n.new_comment .fade-enter[data-v-220b88dc],\n.new_comment .fade-leave-to[data-v-220b88dc] {\n  opacity: 0;\n}\n@media only screen and (max-width: 480px) {\n.new_comment__avatar[data-v-220b88dc] {\n    width: 45px;\n    height: 45px;\n}\n.new_comment__header__title[data-v-220b88dc] {\n    font-size: 12px;\n}\n}", ""]);
 
 // exports
 
@@ -4221,25 +4239,23 @@ var render = function () {
         2
       ),
       _vm._v(" "),
-      !_vm.$store.state.new_comments_selected_reply
+      !_vm.$store.state.comment.new_comments_selected_reply
         ? _c("CommentsPost", {
             ref: "comments_post",
             attrs: {
               type: _vm.type,
               parent: _vm.parent,
               objectId: _vm.objectId,
-              RoundButton: "",
             },
-            on: { newPost: _vm.refreshItems },
+            on: { newPost: _vm.fetch },
           })
         : _vm._e(),
       _vm._v(" "),
       _c("CommentsItems", {
         ref: "comments_items",
         staticClass: "mt2",
-        attrs: { type: _vm.type, objectId: _vm.objectId },
+        attrs: { type: _vm.type, objectId: _vm.objectId, items: _vm.items },
       }),
-      _vm._v("\n    " + _vm._s(_vm.objectId) + "\n"),
     ],
     1
   )
@@ -4272,7 +4288,7 @@ var render = function () {
     [
       _c("div", { staticClass: "new_comment__item" }, [
         _c("div", { staticClass: "new_comment__avatar" }, [
-          _c("img", { attrs: { src: _vm.item.user.avatar, alt: "" } }),
+          _c("strong", [_vm._v(_vm._s(_vm.item.name.charAt(1).toUpperCase()))]),
         ]),
         _vm._v(" "),
         _c("div", { staticClass: "new_comment__content_block" }, [
@@ -4280,7 +4296,7 @@ var render = function () {
             _c("div", { staticClass: "new_comment__header__title" }, [
               _vm._v(
                 "\n                    " +
-                  _vm._s(_vm.item.user.name) +
+                  _vm._s(_vm.item.name) +
                   "\n                "
               ),
             ]),
@@ -4311,9 +4327,12 @@ var render = function () {
                 _vm.$store.state.comment.new_comments_selected_reply !==
                 _vm.item
                   ? _c("div", [
-                      _vm._v(
-                        "\n                        Answer\n                    "
-                      ),
+                      _c("i", {
+                        staticClass: "fa fa-reply",
+                        attrs: { "aria-hidden": "true" },
+                      }),
+                      _vm._v(" "),
+                      _c("span", { staticClass: "ml-2" }, [_vm._v("reply")]),
                     ])
                   : _vm._e(),
               ]
@@ -4353,7 +4372,7 @@ var render = function () {
             "div",
             { staticClass: "new_comment__children" },
             [
-              _c("NewCommentsItems", {
+              _c("CommentsItems", {
                 attrs: {
                   items: _vm.item.children,
                   type: _vm.type,
@@ -4427,32 +4446,66 @@ var render = function () {
     "div",
     { staticClass: "new_comments__post", attrs: { id: "new_comments__post" } },
     [
-      _c("textarea", {
-        directives: [
-          {
-            name: "model",
-            rawName: "v-model",
-            value: _vm.formData.content,
-            expression: "formData.content",
+      _c("div", { staticClass: "form-floating mb-2" }, [
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.formData.name,
+              expression: "formData.name",
+            },
+          ],
+          staticClass: "w-100 mb-2 form-control",
+          attrs: { placeholder: "Enter your name here ...", id: "name" },
+          domProps: { value: _vm.formData.name },
+          on: {
+            input: function ($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.$set(_vm.formData, "name", $event.target.value)
+            },
           },
-        ],
-        attrs: { placeholder: _vm.placeholder, rows: "10" },
-        domProps: { value: _vm.formData.content },
-        on: {
-          input: function ($event) {
-            if ($event.target.composing) {
-              return
-            }
-            _vm.$set(_vm.formData, "content", $event.target.value)
-          },
-        },
-      }),
+        }),
+        _vm._v(" "),
+        _c("label", { attrs: { for: "name" } }, [_vm._v("Name:")]),
+      ]),
       _vm._v(" "),
-      _c("div", [
+      _c("div", { staticClass: "form-floating mb-2" }, [
+        _c("textarea", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.formData.content,
+              expression: "formData.content",
+            },
+          ],
+          staticClass: "w-100 form-control",
+          staticStyle: { height: "250px" },
+          attrs: { placeholder: _vm.placeholder, rows: "10" },
+          domProps: { value: _vm.formData.content },
+          on: {
+            input: function ($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.$set(_vm.formData, "content", $event.target.value)
+            },
+          },
+        }),
+        _vm._v(" "),
+        _c("label", { attrs: { for: "name" } }, [_vm._v("Name:")]),
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "mb-5" }, [
         _vm.showCancelBtn
           ? _c(
               "button",
               {
+                staticClass: "btn btn-secondary",
+                attrs: { type: "button" },
                 on: {
                   click: function ($event) {
                     $event.stopPropagation()
@@ -4467,9 +4520,15 @@ var render = function () {
             )
           : _vm._e(),
         _vm._v(" "),
-        _c("button", { on: { click: _vm.submit } }, [
-          _c("strong", [_vm._v("Send")]),
-        ]),
+        _c(
+          "button",
+          {
+            staticClass: "btn btn-primary",
+            attrs: { type: "button" },
+            on: { click: _vm.submit },
+          },
+          [_c("strong", [_vm._v("Send")])]
+        ),
       ]),
     ]
   )

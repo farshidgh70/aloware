@@ -10,7 +10,6 @@
     </div>
 </template>
 <script>
-import axios from "axios";
 import CommentsItem from "./CommentsItem";
 export default {
     name: "CommentsItems",
@@ -24,20 +23,16 @@ export default {
             type: Number,
             default: 0,
         },
-    },
-    mounted() {
-        this.fetch();
+        items: {
+            type: Array,
+            default: () => [],
+        },
     },
     data: () => ({
         finalItems: [],
     }),
-    methods: {
-        async fetch() {
-            const res = await axios.get(`api/comments/items/article`);
-            if (res.data.success) {
-                this.finalItems = res.result;
-            }
-        },
+    mounted() {
+        this.finalItems = this.items;
     },
     watch: {
         items(val, old) {

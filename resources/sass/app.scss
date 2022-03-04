@@ -1,8 +1,24 @@
-// Fonts
-@import url('https://fonts.googleapis.com/css?family=Nunito');
+header {
+    position: relative;
+    img {
+        margin-bottom: 50px;
+    }
+    h1 {
+        position: absolute;
+        top: 30%;
+        left: 7%;
+        color: white;
+    }
+}
 
-// Variables
-@import 'variables';
-
-// Bootstrap
-@import '~bootstrap/scss/bootstrap';
+@media screen and (max-width: 768px) {
+    header {
+        h1 {
+            position: inherit;
+            color: black;
+            margin-top: 50px;
+            font-size: 20px;
+            font-weight: bold;
+        }
+    }
+}

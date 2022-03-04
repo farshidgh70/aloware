@@ -1,11 +1,26 @@
 <template>
     <div class="new_comments__post" id="new_comments__post">
-        <textarea
-            v-model="formData.content"
-            :placeholder="placeholder"
-            rows="10"
-        />
-        <div>
+        <div class="form-floating mb-2">
+            <input
+                v-model="formData.name"
+                placeholder="Enter your name here ..."
+                class="w-100 mb-2 form-control"
+                id="name"
+            />
+            <label for="name">Name:</label>
+        </div>
+        <div class="form-floating mb-2">
+            <textarea
+                v-model="formData.content"
+                :placeholder="placeholder"
+                rows="10"
+                class="w-100 form-control"
+                style="height: 250px"
+            ></textarea>
+            <label for="name">Name:</label>
+        </div>
+
+        <div class="mb-5">
             <button
                 v-if="showCancelBtn"
                 @click.stop="
@@ -14,10 +29,12 @@
                         null
                     )
                 "
+                class="btn btn-secondary"
+                type="button"
             >
                 Cancel
             </button>
-            <button @click="submit">
+            <button @click="submit" class="btn btn-primary" type="button">
                 <strong>Send</strong>
             </button>
         </div>
@@ -60,10 +77,11 @@ export default {
             this.loading = true;
             let fd = new FormData();
             fd.append("o", this.objectId);
+            fd.append("name", this.formData.name);
             fd.append("content", this.formData.content);
             fd.append("parent", this.parent);
             fd.append("type", this.type);
-            const res = await axios.post(`api/comments/new`, fd);
+            const res = await axios.post(`/api/comments/new`, fd);
             if (res.data.success) {
                 this.formData.content = "";
                 alert("success");

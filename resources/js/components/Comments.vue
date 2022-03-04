@@ -11,13 +11,12 @@
             </label>
         </div>
         <CommentsPost
-            v-if="!$store.state.new_comments_selected_reply"
+            v-if="!$store.state.comment.new_comments_selected_reply"
             :type="type"
             :parent="parent"
             :objectId="objectId"
             ref="comments_post"
-            @newPost="refreshItems"
-            RoundButton
+            @newPost="fetch"
         />
 
         <CommentsItems
@@ -25,11 +24,12 @@
             :type="type"
             :objectId="objectId"
             class="mt2"
+            :items="items"
         />
-        {{ objectId }}
     </div>
 </template>
 <script>
+import axios from "axios";
 import CommentsPost from "./CommentsPost";
 import CommentsItems from "./CommentsItems";
 export default {
@@ -43,17 +43,22 @@ export default {
             type: String,
             default: "article",
         },
-        RoundButton: {
-            type: Boolean,
-            default: false,
-        },
     },
     data: () => ({
         parent: 0,
+        items: [],
     }),
+    mounted() {
+        this.fetch();
+    },
     methods: {
-        refreshItems() {
-            this.$refs.comments_items.fetch();
+        async fetch() {
+            const res = await axios.get(
+                `/api/comments/items/${this.type}/${this.objectId}`
+            );
+            if (res.data.success) {
+                this.items = res.data.result;
+            }
         },
     },
 };

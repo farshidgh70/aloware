@@ -20,5 +20,5 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::group(["prefix"=>"comments"], function(){
     Route::post('new', 'ApiController@NewComment')->name('api.NewComment');
-    Route::get('items/{type}', 'ApiController@Comments')->name('api.Comments');
+    Route::get('items/{type}/{id}', 'ApiController@Comments')->name('api.Comments');
 });

@@ -4,11 +4,16 @@ namespace App\Http\Controllers;
 
 use App\Models\Comment;
 use App\Models\Post;
+use App\Traits\CommentTrait;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
+
+
 class ApiController extends Controller
 {
+    use CommentTrait;
+
     public function NewComment()
     {
         try {
@@ -59,6 +64,7 @@ class ApiController extends Controller
             $item = new Comment();
             $item->parent_id = $parent_id;
             $item->commentable()->associate($morph);
+            $item->name = request('name');
             $item->content = request('content');
             $item->ip = request()->ip();
             $item->save();
@@ -70,10 +76,27 @@ class ApiController extends Controller
         }
     }
 
-    public function Comments($type)
+    public function Comments($type,$id)
     {
-        try{}
-        catch(\Exception $ex){
+        try{
+            $result = [];
+            $item = null;
+
+            switch($type){
+                case 'article':
+                    $item = Post::find($id);
+                    break;
+            }
+            if(!$item){
+                return response()->json(['success' => false, 'message' => 'Post not found!']);
+            }
+            if($Q_comments = $item->comments()->orderBy("id","desc")->get()){
+                $result = $this->getJsonComments($Q_comments->toArray());
+            }
+
+            return response()->json(['success' => true, 'result' => $result]);
+        }
+        catch(\Exception $ex){return $ex;
             return response()->json(['success' => false, 'message' => 'Can not fetch data!']);
         }
     }

@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Post;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,6 +18,14 @@ use Illuminate\Support\Facades\Route;
 //     return view('home',["objectId" => 1]);
 // });
 
-Route::get('/{id}', function ($id) {
-    return view('home',["objectId" => $id]);
+Route::get('/post/{id}', function ($id) {
+    $post = Post::find($id);
+    if(!$post){
+        abort('404');
+    }
+    return view('home',[
+        "objectId" => $id,
+        "title" => $post->title,
+        "content" => $post->content,
+    ]);
 });
